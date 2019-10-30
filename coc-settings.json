@@ -1,0 +1,42 @@
+{
+    "suggest.triggerAfterInsertEnter" : true,
+    "suggest.noselect" : false,
+    "suggest.minTriggerInputLength": 2,
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c","cpp","cuda","cc","objc","objcpp"],
+            "rootPatterns": [".ccls","compile_commands.json",".vim/",".git/",".hg/"],
+            "initializationOptions": {
+                "cache": {
+                    "directory":".ccls-cache"
+                }
+            }
+        },
+        "golang": {
+            "command": "go-langserver",
+            "filetypes": ["go"],
+            "initializationOptions": {
+                "gocodeCompletionEnabled": true,
+                "diagnosticsEnabled": true,
+                "lintTool": "golint"
+            }
+        },
+        "haskell": {
+            "command": "hie-wrapper",
+            "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
+            "filetypes": ["hs", "lhs", "haskell"],
+            "initializationOptions": {},
+            "settings": {
+                "languageServerHaskell": {
+                    "hlintOn": false,
+                    "maxNumberOfProblems": 10,
+                    "completionSnippetsOn": true
+                }
+            }
+        }
+
+
+    },
+    "python.jediEnabled": false
+}
