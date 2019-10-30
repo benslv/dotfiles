@@ -370,7 +370,7 @@ call plug#end()
 " Plugin Configs
 
 " Pywal config
-colorscheme wal
+colorscheme desert
 
 " Polyglot Config
 let g:polyglot_disabled = ['py', 'markdown', 'latex'] " Disable polyglot for everything it will conflict with ale on (expand me!)

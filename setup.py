@@ -58,17 +58,5 @@ if yes or ("n" not in input("Install nvim configs? (Y/n) ").lower()):
     coc_plugins()
     print("Installed coc.nvim plugins")
 
-if yes or ("n" not in input("Install spicetify configs? (Y/n) ").lower()):
-    link(os.path.expanduser("~/.config/spicetify/Themes"), "/spicetify/Themes")
-    link(os.path.expanduser("~/.config/spicetify/config.ini"), "/spicetify/config.ini")
-    print("Installed spicetify configs")
-
-if yes or ("n" not in input("Install i3 configs? (Y/n) ").lower()):
-    link(i3, "/i3")
-    print("Installed i3 configs")
-    link(polybar, "/i3/polybar")
-    print("Installed polybar configs")
-
-if yes or ("n" not in input("Install pacman.conf? (Y/n) ").lower()):
-    link(pacman, "/pacman.conf", sudo=True)
-    print("Installed pacman config")
+if yes or ("n" not in input("Install rofi configs? (Y/n) ").lower()):
+    link(os.path.expanduser("~/.config/rofi"), "/rofi")
