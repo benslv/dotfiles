@@ -242,4 +242,5 @@ HISTSIZE=10000000
 SAVEHIST=10000
 setopt SHARE_HISTORY
 
-
+# Add Flutter to path
+export PATH="$PATH:/home/ben/Development/flutter/bin"
