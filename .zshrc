@@ -1,112 +1,246 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+#Init
+autoload -U compinit promptinit
+autoload -U colors && colors
+compinit
+promptinit
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/ben/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="spaceship"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Aliases 
-alias ls="exa -lhgbHm --git"
-alias vi"nvim"
+#Aliases
+alias vi="nvim"
 alias vim="nvim"
+alias ls="ls -lh --color"
+alias sl="ls -lh --color"
+alias rm="rm -rfv"
+alias cp="cp -av --reflink=auto"
 alias mv="mv -v"
-alias rm="rm -rv"
+alias du="du -sh"
+alias mkdir="mkdir -p"
+alias dirs="dirs -v"
+alias less="less -r"
+alias more="less -r"
+alias reboot="sudo reboot"
+alias poweroff="sudo poweroff"
+alias btrfs-du="btrfs fi du -s --human-readable"
+alias btrfs-list="sudo btrfs subvolume list / -t"
+alias btrfs-df="btrfs filesystem df /"
+alias sudo="sudo "
+alias rsync="rsync -Pva"
+alias mount="sudo mount"
+alias umount="sudo umount"
+alias feh-svg="feh --magick-timeout 1"
 alias neofetch="clear; neofetch"
-alias open="xdg-open"
+alias aria2c="aria2c --file-allocation=none"
+alias nando="nvim"
+alias zshrc-reload="reload-zshrc"
+alias xclip="xclip -selection clipboard"
+alias df="df -h"
+alias fex="nautilus ."
+alias ffprobe="ffprobe -hide_banner"
+alias ffmpeg="ffmpeg -hide_banner"
+alias ffplay="ffplay -hide_banner"
 
-[ -f ~/.resh/shellrc ] && source ~/.resh/shellrc
+alias -g sd="~/ScratchArea"
+alias -g dl="~/Downloads"
+alias -g "..."="../.."
 
 eval $(thefuck --alias)
+
+alias sl=ls
+
+if type exa > /dev/null
+then
+    alias ls="exa -lhgbHm --git "
+    alias lst="exa -lhgbHmT --git"
+fi
+
+#ZSH Style and Options
+zstyle ':completion:*' menu select
+    setopt completealiases
+    setopt extendedglob
+    unsetopt nomatch
+    prompt walters
+
+#Functions
+mkcdir () {
+    mkdir -p -- "$1" &&
+        cd -P -- "$1"
+    }
+
+reload-zshrc () {
+source ~/.zshrc
+}
+
+lls () {
+    clear
+    ls
+}
+
+borderless () {
+    xprop -f _MOTIF_WM_HINTS 32c -set _MOTIF_WM_HINTS "0x2, 0x0, 0x0, 0x0, 0x0"
+}
+
+borderless-undo () {
+    xprop -f _MOTIF_WM_HINTS 32c -set _MOTIF_WM_HINTS "0x2, 0x0, 0x1, 0x0, 0x0"
+}
+
+magnet-info () {
+    wd=`pwd`
+    cd /tmp
+    hash=$(echo "$1" | grep -oP "(?<=btih:).*?(?=&)")
+    echo "Magnet hash: $hash"
+    aria2c --bt-metadata-only=true --bt-save-metadata=true "$1"
+    aria2c "$hash.torrent" -S
+    cd $wd
+}
+
+ffcompare () {
+    ffplay $1 & ffplay $2
+}
+
+vmaf () {
+    ffmpeg -hwaccel auto -i $1 -hwaccel auto -i $2 -lavfi libvmaf="model_path=/usr/share/model/vmaf_v0.6.1.pkl" -an -f null -
+}
+
+ex () {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1   ;;
+            *.tar.gz)    tar xzf $1   ;;
+            *.tar.xz)    tar xf $1    ;;
+            *.bz2)       bunzip2 $1   ;;
+            *.rar)       unrar x $1   ;;
+            *.gz)        gunzip $1    ;;
+            *.tar)       tar xf $1    ;;
+            *.tbz2)      tar xjf $1   ;;
+            *.tgz)       tar xzf $1   ;;
+            *.zip)       unzip $1     ;;
+            *.Z)         uncompress $1;;
+            *.7z)        7z x $1      ;;
+            *)           echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# esc-esc sudo
+sudo-command-line() {
+[[ -z $BUFFER ]] && zle up-history
+if [[ $BUFFER == sudo\ * ]]; then
+    LBUFFER="${LBUFFER#sudo }"
+elif [[ $BUFFER == $EDITOR\ * ]]; then
+    LBUFFER="${LBUFFER#$EDITOR }"
+    LBUFFER="sudoedit $LBUFFER"
+elif [[ $BUFFER == vim\ * ]]; then
+    LBUFFER="${LBUFFER#vim }"
+    LBUFFER="sudoedit $LBUFFER"
+elif [[ $BUFFER == sudoedit\ * ]]; then
+    LBUFFER="${LBUFFER#sudoedit }"
+    LBUFFER="$EDITOR $LBUFFER"
+else
+    LBUFFER="sudo $LBUFFER"
+fi
+}
+zle -N sudo-command-line
+bindkey "\e\e" sudo-command-line
+bindkey -M vicmd '\e\e' sudo-command-line
+
+
+
+
+#Sourcing
+if [ -d /etc/zsh/zshrc.d ]; then
+    for file in /etc/zsh/zshrc.d/*; do
+        source $file
+    done
+fi
+
+if [ -d "$HOME/.bin" ] ; then
+    PATH="$HOME/.bin:$PATH"
+fi
+
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "/ubin" ] ; then
+    PATH="/ubin:$PATH"
+fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+(cat ~/.cache/wal/sequences 2>/dev/null &)
+
+
+#Variables
+export VISUAL="nvim"
+export EDITOR="nvim"
+export HISTFILE="~/zfile"
+
+eval $(ssh-agent) > /dev/null
+
+#Sourcing Plugins
+
+if [ -f ~/.zsh/vi-mode.plugin.zsh ]; then
+    source ~/.zsh/vi-mode.plugin.zsh
+else
+    echo "vi-mode plugin not loaded"
+fi
+
+if grep -Fxq "arch" /etc/os-release; then
+    if [ -f ~/.zsh/git.plugin.zsh ]; then
+        source ~/.zsh/git.plugin.zsh
+    else
+        echo "archlinux plugin not loaded"
+    fi
+fi
+
+if [ -f ~/.zsh/globalias.plugin.zsh ]; then
+    source ~/.zsh/globalias.plugin.zsh
+else
+    echo "globalias plugin not loaded"
+fi
+
+if [ -f ~/.zsh/git.plugin.zsh ]; then
+    source ~/.zsh/git.plugin.zsh
+else
+    echo "git plugin not loaded"
+fi
+
+if [ -f ~/.zsh/you-should-use.plugin.zsh ]; then
+    source ~/.zsh/you-should-use.plugin.zsh
+else
+    echo "you-should-use plugin not loaded"
+fi
+
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    echo "zsh-syntax-highlighting plugin not loaded"
+fi
+
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
+    echo "zsh-autosuggestions plugin not loaded"
+fi
+
+if grep -Fxq "arch" /etc/os-release; then
+    if [ -f /usr/share/doc/pkgfile/command-not-found.zsh ]; then
+        source /usr/share/doc/pkgfile/command-not-found.zsh
+    else
+        echo "pkgfile plugin not loaded"
+    fi
+fi
+
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+
+# Add Flutter to path
+export PATH="$PATH:/home/ben/Development/flutter/bin"
