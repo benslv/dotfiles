@@ -133,7 +133,7 @@ colors:
 
     # Normal colors
     normal:
-        black: "#1d1d1d" # Uses grey instead.
+        black: "#808080" # Uses grey instead.
         red: "#f841a0" # Uses magenta instead.
         green: "#25c141"
         yellow: "#fdf454"
@@ -144,7 +144,7 @@ colors:
 
     # Bright colors
     bright:
-        black: "#1d1d1d"
+        black: "#808080"
         red: "#f6188f" # Uses magenta instead.
         green: "#1ebb2b"
         yellow: "#fdf834"
