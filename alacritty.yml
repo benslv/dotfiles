@@ -3,8 +3,9 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
 # TERM variable
+  WINIT_X11_SCALE_FACTOR: "1.75"
 #
 # This value is used to set the `$TERM` environment variable for
 # each instance of Alacritty. If it is not present, alacritty will
@@ -19,7 +20,7 @@ window:
     # If both are `0`, this setting is ignored.
     dimensions:
         columns: 100
-        lines: 85
+        lines: 30
 
     # Window position (changes require restart)
     #
@@ -133,7 +134,7 @@ colors:
 
     # Normal colors
     normal:
-        black: "#808080" # Uses grey instead.
+        black: "#222226"
         red: "#f841a0" # Uses magenta instead.
         green: "#25c141"
         yellow: "#fdf454"
@@ -152,6 +153,7 @@ colors:
         magenta: "#f85a21" # Uses orange instead.
         cyan: "#12c3e2"
         white: "#ffffff"
+
 
 # Visual Bell
 #
