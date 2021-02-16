@@ -112,6 +112,7 @@ alias open="xdg-open"
 alias gs="git status"
 alias yarn="yarn --emoji true"
 alias pypy="pypy3"
+alias cat="bat"
 
 [ -f ~/.resh/shellrc ] && source ~/.resh/shellrc
 
