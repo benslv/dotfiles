@@ -125,4 +125,3 @@ export EDITOR=nvim;
 export PATH="$(yarn global bin):$PATH"
 
 eval $(starship init zsh)
-eval $(thefuck --alias)
