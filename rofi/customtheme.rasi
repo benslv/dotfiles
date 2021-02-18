@@ -1,0 +1,53 @@
+/**
+ * Copyright: Ben Silverman
+**/
+
+/* Global settings (and a couple of colour variables) */
+* {
+	accent: #2a71eb;
+	secondary: #222226;
+	text: #ffffff;
+
+	lines: 5;
+	columns: 1;
+
+	font: "SF Pro Text 14";
+	text-color: @text;
+
+	background-color: transparent;
+	
+	fullscreen: false;
+	width: 500px;
+
+}
+
+/* Main Rofi window containing the different programs and input box */
+window {
+	background-color: @secondary;
+	border: 1px;
+	border-color: @accent;
+	border-radius: 10px;
+	padding: 2em;
+}
+
+/* Input section you type in */
+inputbar {
+	margin: 0 0 1em 0;
+}
+
+/* List of items returned when you type */
+listview {
+	spacing: 0.25em;
+}
+
+/* Individual elements in the listview */
+element {
+	highlight: @accent;
+	padding: 10px 15px;
+}
+
+/* Styling for the element when you select it */
+element selected {
+	background-color: @accent;
+	border-radius: 5px;
+}
